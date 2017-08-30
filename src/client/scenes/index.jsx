@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { renderRoutes } from 'react-router-config';
-import Header from '../component/header';
+import Header from '../components/Header';
 
 class App extends Component {
   constructor(props) {

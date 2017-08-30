@@ -1,7 +1,7 @@
-import App from './container';
-import Lesson from './container/lessons';
-import LessonDetail from './container/lesson-detail';
-import Home from './container/home';
+import App from './scenes';
+import LessonList from './scenes/LessonList';
+import LessonDetail from './scenes/LessonDetail';
+import Home from './scenes/Home';
 
 const routes = [
   {
@@ -13,13 +13,11 @@ const routes = [
         component: Home,
       },
       {
-        path: '/lessons',
-        exact: true,
-        component: Lesson,
+        path: '/lesson-list',
+        component: LessonList,
       },
       {
         path: '/lesson-detail',
-        exact: true,
         component: LessonDetail,
       },
     ],

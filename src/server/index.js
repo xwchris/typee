@@ -14,7 +14,7 @@ app.set('views', path.join(__dirname, '..', 'views'));
 app.set('view engine', 'pug');
 
 // 设置静态资源服务器
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, '../..', 'public')));
 
 // 路由设置
 app.get('*', (req, res) => {

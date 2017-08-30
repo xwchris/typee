@@ -6,7 +6,7 @@ module.exports = {
   // 调试工具
   devtool: 'eval-source-map',
   // 入口文件
-  entry: './client/index.jsx',
+  entry: './src/client/index.jsx',
   // 打包类型
   target: 'web',
   // 输出配置
@@ -33,6 +33,11 @@ module.exports = {
       options: {
         presets: ['es2015', 'react'],
       },
+    }, {
+      // 要匹配的文件类型
+      test: /\.less$/,
+      // 要使用的加载器
+      loader: 'less-loader',
     }],
   },
 };

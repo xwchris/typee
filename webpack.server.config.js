@@ -12,7 +12,7 @@ fs.readdirSync('node_modules')
 // 导出服务端配置
 module.exports = {
   // 入口文件
-  entry: './server/index.js',
+  entry: './src/server/index.js',
   // 指定打包种类 服务端避免打包node文件
   target: 'node',
   // 打包时避免对__dirname进行绝对路径替换

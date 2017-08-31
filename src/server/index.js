@@ -2,7 +2,7 @@ import path from 'path';
 import React from 'react';
 import express from 'express';
 import { renderToString } from 'react-dom/server';
-import StaticRouter from 'react-router-dom/StaticRouter';
+import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import routes from '../client/routes';
 
@@ -17,7 +17,7 @@ app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, '../..', 'public')));
 
 // 路由设置
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   const context = {};
   const content = renderToString(
     <StaticRouter location={req.url} context={context}>

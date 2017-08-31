@@ -1,6 +1,8 @@
 // 本配置文件为webpack客户端代码配置文件
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
+
 // 导出客户端配置
 module.exports = {
   // 调试工具
@@ -44,5 +46,6 @@ module.exports = {
   // 插件配置
   plugins: [
     new ExtractTextPlugin('style.css'),
+    new webpack.HotModuleReplacementPlugin(),
   ],
 };

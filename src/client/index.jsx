@@ -1,14 +1,16 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom/BrowserRouter';
+import { BrowserRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import routes from './routes';
 
-const AppRouter = () => (
-  <BrowserRouter>
-    {renderRoutes(routes)}
-  </BrowserRouter>
-);
+const AppRouter = () => {
+  return (
+    <BrowserRouter>
+      {renderRoutes(routes)}
+    </BrowserRouter>
+  )
+};
 
 render(
   <AppRouter />,

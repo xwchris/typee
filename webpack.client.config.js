@@ -38,14 +38,18 @@ module.exports = {
     }, {
       test: /\.less$/,
       use: ExtractTextPlugin.extract({
-        fallback: "style-loader",
+        fallback: 'style-loader',
         use: ['css-loader', 'less-loader'],
-      })
+      }),
     }],
   },
   // 插件配置
   plugins: [
-    new ExtractTextPlugin('style.css'),
+    // 分离插件
+    new ExtractTextPlugin('static/style.css'),
+    // 热加载插件
     new webpack.HotModuleReplacementPlugin(),
+    // 错误处理插件
+    new webpack.NoErrorsPlugin(),
   ],
 };

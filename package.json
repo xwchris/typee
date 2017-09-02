@@ -8,8 +8,10 @@
     "lib": "lib"
   },
   "scripts": {
-    "start": "node ./public/bundle.server.js",
-    "dev": "DEBUG=express:* node ./bin/www"
+    "lint": "eslint ./src --ext .js,.jsx",
+    "clean": "rm -rf ./public",
+    "server:dev": "NODE_ENV=development node ./public/bundle.server.js",
+    "server:prod": "NODE_ENV=production node ./public/bundle.server.js"
   },
   "repository": {
     "type": "git",
@@ -52,6 +54,8 @@
     "less-loader": "^4.0.5",
     "style-loader": "^0.18.2",
     "webpack": "^3.5.2",
-    "webpack-bundle-analyzer": "^2.9.0"
+    "webpack-bundle-analyzer": "^2.9.0",
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-hot-middleware": "^2.18.2"
   }
 }

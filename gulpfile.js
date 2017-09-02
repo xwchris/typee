@@ -24,4 +24,4 @@ gulp.task('webpack:server', (callback) => {
 });
 
 // 打包服务器文件
-gulp.task('default', ['webpack:client', 'webpack:server']);
+gulp.task('default', ['clean', 'webpack:client', 'webpack:server']);

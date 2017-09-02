@@ -1,0 +1,50 @@
+// 通用容器
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+
+  @media (min-width:768px) {
+    width: 750px;
+  }
+
+  @media (min-width:992px) {
+    width: 970px;
+  }
+
+  @media (min-width:1200px) {
+    width: 1170px;
+  }
+}
+
+// 清除浮动
+.clearfix {
+  *zoom: 1;
+
+  &:before, &:after {
+    display: table;
+    line-height: 0;
+    content: "";
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+// 左浮动
+.pull-left {
+  float: left;
+}
+
+// 右浮动
+.pull-right {
+  float: right;
+}
+
+// 按钮样式
+.btn {
+  user-select: none;
+  cursor: pointer;
+}

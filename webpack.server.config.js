@@ -11,6 +11,8 @@ fs.readdirSync('node_modules')
 
 // 导出服务端配置
 module.exports = {
+  // 调试工具
+  devtool: 'eval-source-map',
   // 入口文件
   entry: './src/server/index.js',
   // 指定打包种类 服务端避免打包node文件

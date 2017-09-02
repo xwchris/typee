@@ -1,12 +1,14 @@
 // 本配置文件为webpack客户端代码配置文件
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
 
 // 导出客户端配置
 module.exports = {
   // 调试工具
   devtool: 'eval-source-map',
   // 入口文件
-  entry: './src/client/index.jsx',
+  entry: ['./src/client/index.jsx', './src/client/style.less'],
   // 打包类型
   target: 'web',
   // 输出配置
@@ -19,7 +21,7 @@ module.exports = {
   // 配置解析模块请求
   resolve: {
     // 使用到的扩展名
-    extensions: ['.js', '.json', '.jsx', '.css'],
+    extensions: ['.js', '.json', '.jsx', '.css', '.less'],
   },
   // 配置相关模块
   module: {
@@ -34,10 +36,20 @@ module.exports = {
         presets: ['es2015', 'react'],
       },
     }, {
-      // 要匹配的文件类型
       test: /\.less$/,
-      // 要使用的加载器
-      loader: 'less-loader',
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: ['css-loader', 'less-loader'],
+      }),
     }],
   },
+  // 插件配置
+  plugins: [
+    // 分离插件
+    new ExtractTextPlugin('static/style.css'),
+    // 热加载插件
+    new webpack.HotModuleReplacementPlugin(),
+    // 错误处理插件
+    new webpack.NoErrorsPlugin(),
+  ],
 };

@@ -2,6 +2,7 @@ import App from './scenes';
 import LessonList from './scenes/LessonList';
 import LessonDetail from './scenes/LessonDetail';
 import Home from './scenes/Home';
+import ProblemFeedback from './scenes/ProblemFeedback';
 
 const routes = [
   {
@@ -19,6 +20,10 @@ const routes = [
       {
         path: '/lesson-detail',
         component: LessonDetail,
+      },
+      {
+        path: '/problem-feedback',
+        component: ProblemFeedback,
       },
     ],
   },

@@ -28,7 +28,7 @@ app.use(webpackHotMiddleware(compiler));
 app.use('/static', express.static(path.join(__dirname, '../..', 'public/static')));
 
 // 路由设置
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   const context = {};
   const content = renderToString(
     <StaticRouter location={req.url} context={context}>

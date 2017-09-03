@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { renderRoutes } from 'react-router-config';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 class App extends Component {
   constructor(props) {
@@ -15,10 +16,12 @@ class App extends Component {
     return (
       <div className="index-container">
         <Header />
-        <h1>首页</h1>
         <main className="main">
-          {renderRoutes(this.props.route.routes)}
+          <div className="container">
+            {renderRoutes(this.props.route.routes)}
+          </div>
         </main>
+        <Footer />
       </div>
     );
   }

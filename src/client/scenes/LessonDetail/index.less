@@ -1,0 +1,29 @@
+.lesson-detail-container {
+  font-family: "Ubuntu Mono",monospace;
+
+  .code-box {
+    padding: 20px;
+    border: 1px solid #999999;
+    background-color: #eeeeee;
+    color: #999999;
+    font-size: 14px;
+    border-radius: 8px;
+    
+    span {
+      padding: 5px 0;
+
+      &.active {
+        background: #6DE56D;
+        color: @white;
+      }
+
+      &.error {
+        color: red;
+      }
+
+      &.pass {
+        color: #6E6EEC;
+      }
+    }
+  }
+}

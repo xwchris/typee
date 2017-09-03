@@ -11,15 +11,6 @@ const Header = () => (
         <li className="nav-item">
           <NavLink className="btn item-btn" activeClassName="active" to="/lesson-list">课程</NavLink>
         </li>
-        <li className="nav-item">
-          <NavLink
-            className="btn item-btn"
-            activeClassName="active"
-            to="/lesson-detail"
-          >
-            课程详情页
-          </NavLink>
-        </li>
         <li className="nav-item pull-right">
           <NavLink
             className="btn item-btn"

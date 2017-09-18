@@ -2,7 +2,48 @@ import React from 'react';
 
 const Home = () => (
   <div className="home-container">
-    这就是一个首页，目前还不知道放什么
+    <div className="home-banner">
+      <img className="banner-image" src="./static/images/home-banner.jpg" alt="banner图" />
+      <h1 className="banner-desc">为提高所有人打字技术而生</h1>
+    </div>
+    <div className="home-content container">
+      <h2 className="content-title">三大优势</h2>
+      <div className="part-list">
+        <div className="part-item">
+          <div className="item-image">
+            <img className="image-src" src="./static/images/home-image-1.png" alt="" className="image-src" />
+          </div>
+          <div className="item-text">
+            <div className="text-title">详尽的练习报告</div>
+            <div className="text-desc">
+              在每课练习完毕后会根据您的练习情况给出详细的练习报告，帮助您对自己当前的水平进行定位，报告内容包括WPM、有效敲击比例、错误最多按键等项目。
+            </div>
+          </div>
+        </div>
+        <div className="part-item clearfix">
+          <div className="item-text">
+            <div className="text-title">科学的练习课程</div>
+            <div className="text-desc">
+              在每课练习完毕后会根据您的练习情况给出详细的练习报告，帮助您对自己当前的水平进行定位，报告内容包括WPM、有效敲击比例、错误最多按键等项目。
+            </div>
+          </div>
+          <div className="item-image pull-right">
+            <img className="image-src" src="./static/images/home-image-2.png" alt="" className="image-src" />
+          </div>
+        </div>
+        <div className="part-item">
+          <div className="item-image">
+            <img className="image-src" src="./static/images/home-image-3.png" alt="" className="image-src" />
+          </div>
+          <div className="item-text">
+            <div className="text-title">高效的练习方法</div>
+            <div className="text-desc">
+              在每课练习完毕后会根据您的练习情况给出详细的练习报告，帮助您对自己当前的水平进行定位，报告内容包括WPM、有效敲击比例、错误最多按键等项目。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 );
 

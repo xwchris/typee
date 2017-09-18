@@ -15,13 +15,18 @@ class timer extends Component {
     };
   }
 
-  // 设置定时器
-  setTimer() {
+  // 设置时间
+  setTimer(time) {
     this.timer = setInterval(() => {
       this.setState({
-        currTime: this.state.currTime + 1,
+        currTime: (time || 0) + 1,
       });
     }, 1000);
+  }
+
+  // 获取时间
+  getTimer() {
+    return this.state.currTime;
   }
 
   // 清除定时器

@@ -7,12 +7,16 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from '../reducer';
 import routes from '../client/routes';
 import webpackClientConfig from '../../webpack.client.config';
 
 const compiler = webpack(webpackClientConfig);
 // 创建服务器实例
 const app = express();
+const store = createStore(reducer);
 
 // 设置视图引擎
 app.set('views', path.join(__dirname, '..', 'views'));
@@ -31,9 +35,11 @@ app.use('/static', express.static(path.join(__dirname, '../..', 'public/static')
 app.get('*', (req, res) => {
   const context = {};
   const content = renderToString(
-    <StaticRouter location={req.url} context={context}>
-      {renderRoutes(routes)}
-    </StaticRouter>,
+    <Provider store={store}>
+      <StaticRouter location={req.url} context={context}>
+        {renderRoutes(routes)}
+      </StaticRouter>
+    </Provider>,
   );
 
   // 服务端渲染

@@ -34,6 +34,13 @@ module.exports = {
   resolve: {
     // 使用到的扩展名
     extensions: ['.js', '.json', '.jsx'],
+    // 配置文件夹别名
+    alias: {
+      components: path.resolve(__dirname, './src/client/components'),
+      scenes: path.resolve(__dirname, './src/client/scenes'),
+      services: path.resolve(__dirname, './src/client/services'),
+      styles: path.resolve(__dirname, './src/client/styles'),
+    },
   },
   // 配置相关模块
   module: {

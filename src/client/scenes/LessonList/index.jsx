@@ -1,18 +1,47 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import getData from 'services/dataFuncs';
 
-const LessonList = () => (
-  <div className="lesson-list-container">
-    <h1 className="lesson-list-title">课程列表</h1>
-    <div className="lesson-list-content clearfix">
-      {
-        new Array(9).fill(0).map(() => (
-          <div className="btn lesson-card pull-left">
-            Python
+class LessonList extends Component {
+  componentWillMount() {
+    getData({
+      url: 'http://api.ustudents.cn',
+      callback: (data) => {
+        this.props.dispatch({
+          type: 'LESSON_LIST',
+          key: 'lessonList',
+          value: data.lesson_list,
+        });
+      },
+    });
+  }
+
+  render() {
+    // 课程列表
+    const { lessonList = [] } = this.props;
+    return (
+      <div className="lesson-list-container">
+        <div className="lesson-list-content container">
+          <h1 className="content-title">课程列表</h1>
+          <div className="content-list clearfix">
+            {
+              lessonList.map(item => (
+                <Link className="btn content-item pull-left" key={item.id} to={`/lesson-detail/${item.id}/0`}>
+                  <div className="item-title">{item.name}</div>
+                  <div className="item-desc">这是一门方便灵活的程序语言</div>
+                </Link>
+              ))
+            }
           </div>
-        ))
-      }
-    </div>
-  </div>
-);
+        </div>
+      </div>
+    );
+  }
+}
 
-export default LessonList;
+export default connect(
+  state => ({
+    lessonList: state.lessonList,
+  }),
+)(LessonList);

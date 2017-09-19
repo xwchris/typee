@@ -1,23 +1,28 @@
 .component-header {
-  background: #efefef;
-  border-bottom: 1px solid #dddddd;
+  background: @white;
+  box-shadow: 0 1px 20px 1px @grayC;
+  height: 60px;
+  
+
+  .logo-box {
+    color: @main;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 60px;
+  }
 
   .nav-list {
 
     .nav-item {
       display: inline-block;
       padding: 0 15px;
-      height: 60px;
-      line-height: 60px;
+      line-height: 57px;
+      font-size: 16px;
+      text-decoration: none;
+      color: @font-color;
 
-      .item-btn {
-        font-size: 16px;
-        text-decoration: none;
-        color: @font-color;
-
-        &:hover, &.active {
-          color: #6E6EEC;
-        }
+      &:hover, &.active {
+        border-bottom: 3px solid @main;
       }
     }
   }

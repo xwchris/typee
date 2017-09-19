@@ -51,12 +51,14 @@ class LessonDetail extends Component {
 
   // 键盘按下事件
   handleKeyPress(e) {
+    // 阻止浏览器默认按键事件
     e.preventDefault();
-    let inputChar = String.fromCharCode(e.charCode);
+    const inputChar = String.fromCharCode(e.charCode);
     const inputCode = e.keyCode;
     const arr = this.state.inputArray;
     const pointer = this.state.pointer;
     let tempChar = inputChar;
+    let countInitialSpace = 0;
     if (this.textArr.length === 0 || pointer >= this.textArr.length) {
       return;
     }
@@ -71,9 +73,16 @@ class LessonDetail extends Component {
     if (pointer === 0 && this.timer) {
       this.timer.setTimer();
     }
+    countInitialSpace = pointer + 1;
     // 判断是否相同 相同则类设为pass否则设为error
-    if ((inputChar === this.textArr[pointer]) || (inputCode === 13 && this.textArr[pointer] === '\n')) {
+    if ((inputChar === this.textArr[pointer])) {
       arr.push('pass');
+    } else if (inputCode === 13 && this.textArr[pointer] === '\n') {
+      arr.push('pass');
+      while (this.textArr[countInitialSpace] === ' ' || this.textArr[countInitialSpace] === '\n') {
+        arr.push('pass');
+        countInitialSpace += 1;
+      }
     } else {
       let errorChar = this.textArr[pointer];
       if (errorChar === '\n') {
@@ -83,10 +92,16 @@ class LessonDetail extends Component {
       }
       this.recordInput(errorChar, 'errorChars');
       arr.push('error');
+      if (this.textArr[pointer] === '\n') {
+        while (this.textArr[countInitialSpace] === ' ' || this.textArr[countInitialSpace] === '\n') {
+          arr.push('pass');
+          countInitialSpace += 1;
+        }
+      }
     }
     // 更新state
     this.setState({
-      pointer: pointer + 1,
+      pointer: countInitialSpace,
       inputArray: arr,
     }, () => {
       // 如果是最后一个字符则显示处理结果

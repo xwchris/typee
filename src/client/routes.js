@@ -18,7 +18,7 @@ const routes = [
         component: LessonList,
       },
       {
-        path: '/lesson-detail/:id',
+        path: '/lesson-detail/:lessonId/:fileIndex',
         component: LessonDetail,
       },
       {

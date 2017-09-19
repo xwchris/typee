@@ -17,9 +17,16 @@ class LessonDetail extends Component {
   }
 
   componentWillMount() {
-    const { id } = this.props.match.params;
+    const { lessonId, fileIndex } = this.props.match.params;
+    const lessonList = this.props.lessonList;
+    this.lesson = {};
+    lessonList.forEach((item) => {
+      if (item.id === lessonId) {
+        this.lesson = item;
+      }
+    });
     getData({
-      url: `http://api.ustudents.cn/file?file_id=${id}`,
+      url: `http://api.ustudents.cn/file?file_id=${this.lesson.file_ids[fileIndex]}`,
       callback: (data) => {
         this.props.dispatch({
           type: 'LESSON_DETAIL',
@@ -45,20 +52,21 @@ class LessonDetail extends Component {
   // 键盘按下事件
   handleKeyPress(e) {
     e.preventDefault();
-    if (this.textArr.length === 0) {
-      return;
-    }
     let inputChar = String.fromCharCode(e.charCode);
     const inputCode = e.keyCode;
     const arr = this.state.inputArray;
     const pointer = this.state.pointer;
+    let tempChar = inputChar;
+    if (this.textArr.length === 0 || pointer >= this.textArr.length) {
+      return;
+    }
     // 记录输入
     if (inputCode === 13) {
-      inputChar = 'enter';
+      tempChar = 'enter';
     } else if (inputCode === 32) {
-      inputChar = 'space';
+      tempChar = 'space';
     }
-    this.recordInput(inputChar);
+    this.recordInput(tempChar);
     // 如果是第一次则开始计时
     if (pointer === 0 && this.timer) {
       this.timer.setTimer();
@@ -76,9 +84,15 @@ class LessonDetail extends Component {
       this.recordInput(errorChar, 'errorChars');
       arr.push('error');
     }
+    // 更新state
     this.setState({
       pointer: pointer + 1,
       inputArray: arr,
+    }, () => {
+      // 如果是最后一个字符则显示处理结果
+      if (this.state.pointer === this.textArr.length) {
+        this.handleInputEnd();
+      }
     });
   }
 
@@ -112,6 +126,7 @@ class LessonDetail extends Component {
 
   // 输入完成事件
   handleInputEnd() {
+    const { fileIndex } = this.props.match.params;
     // 清除计时器
     this.timer.clearTimer();
     // 获取时间 秒为单位
@@ -120,14 +135,19 @@ class LessonDetail extends Component {
     result.time = time;
     // 设置总数
     result.totalCount = (this.props.lessonDetail.file_msg || '').length;
-    // 设置file_id
-    result.fileId = this.props.match.params.id;
+    // 设置lessonId
+    result.lessonId = this.lesson;
+    // 设置fileIndex
+    result.fileIndex = fileIndex;
+    this.props.dispatch({ result });
+    // 显示结果面板
+    this.resultPanel.showResult();
   }
 
   render() {
     return (
       <div className="lesson-detail-container">
-        <Result />
+        <Result ref={(ele) => { this.resultPanel = ele; }} />
         <div className="lesson-detail-content container">
           <pre className="code-box">
             {this.textArr && this.textArr.map((item, index) => (<span key={`char_${index + 1}`} className={getClassName(index, item, this.state)}>{item}</span>)) }
@@ -142,5 +162,6 @@ class LessonDetail extends Component {
 export default connect(
   state => ({
     lessonDetail: state.lessonDetail,
+    lessonList: state.lessonList,
   }),
 )(LessonDetail);

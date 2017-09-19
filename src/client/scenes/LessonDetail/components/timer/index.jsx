@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-
-// 格式化时间
-function parseTime(seconds) {
-  const minute = (seconds - (seconds % 60)) / 60;
-  const second = seconds - (minute * 60);
-  return `${minute < 10 ? `0${minute}` : minute}:${second < 10 ? `0${second}` : second}`;
-}
+import { parseTime } from '../../mixins/helpers';
 
 class timer extends Component {
   constructor(props) {
@@ -16,10 +10,10 @@ class timer extends Component {
   }
 
   // 设置时间
-  setTimer(time) {
+  setTimer() {
     this.timer = setInterval(() => {
       this.setState({
-        currTime: (time || 0) + 1,
+        currTime: this.state.currTime + 1,
       });
     }, 1000);
   }

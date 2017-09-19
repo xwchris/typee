@@ -27,7 +27,7 @@ class LessonList extends Component {
           <div className="content-list clearfix">
             {
               lessonList.map(item => (
-                <Link className="btn content-item pull-left" key={item.id} to={`/lesson-detail/${item.file_ids[0]}`}>
+                <Link className="btn content-item pull-left" key={item.id} to={`/lesson-detail/${item.id}/0`}>
                   <div className="item-title">{item.name}</div>
                   <div className="item-desc">这是一门方便灵活的程序语言</div>
                 </Link>

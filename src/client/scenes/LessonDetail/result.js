@@ -1,8 +1,10 @@
 export default {
-  // 文件
-  fileId: '',
+  // 课程ID
+  lessonId: '',
+  // 文件Index
+  fileIndex: 0,
   // 总的字符数
-  totalCount: {},
+  totalCount: 0,
   // 输入的字符
   inputChars: {},
   // 错误字符

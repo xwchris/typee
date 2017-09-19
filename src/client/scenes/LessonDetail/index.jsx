@@ -115,14 +115,21 @@ class LessonDetail extends Component {
   handleKeyDown(e) {
     const arr = this.state.inputArray;
     const pointer = this.state.pointer;
+    let countSpace = 1;
     // 退格键
     if (e.keyCode === 8) {
       this.recordInput('delete');
-      if (arr.length >= 0) {
+      while (pointer - countSpace >= 0 && (this.textArr[pointer - countSpace] === ' ' || this.textArr[pointer - countSpace] === '\n')) {
+        countSpace += 1;
+      }
+      if (countSpace !== 1) {
+        countSpace -= 1;
+      }
+      while (arr.length > pointer - countSpace) {
         arr.pop();
       }
       this.setState({
-        pointer: pointer > 0 ? pointer - 1 : pointer,
+        pointer: pointer - countSpace > 0 ? pointer - countSpace : 0,
         inputArray: arr,
       });
     }

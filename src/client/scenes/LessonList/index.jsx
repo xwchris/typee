@@ -8,11 +8,16 @@ class LessonList extends Component {
     getData({
       url: 'http://api.ustudents.cn',
       callback: (data) => {
-        this.props.dispatch({
-          type: 'LESSON_LIST',
-          key: 'lessonList',
-          value: data.lesson_list,
-        });
+        // 请求错误
+        if (data.status === 1) {
+          window.createTip(data.error_message, 'error');
+        } else {
+          this.props.dispatch({
+            type: 'LESSON_LIST',
+            key: 'lessonList',
+            value: data.lesson_list,
+          });
+        }
       },
     });
   }
@@ -20,16 +25,25 @@ class LessonList extends Component {
   render() {
     // 课程列表
     const { lessonList = [] } = this.props;
+    // 取出所有文件列表
+    const list = lessonList.map((item) => {
+      const cell = item.file_ids.map((fileId, index) => ({ fileId, name: item.name, index: index + 1, desc: '这是一门方便灵活的程序语言' }));
+      return cell;
+    });
+    // 扁平化数组
+    let cellList = [];
+    list.forEach((item) => {
+      cellList = cellList.concat(item);
+    });
     return (
       <div className="lesson-list-container">
         <div className="lesson-list-content container">
-          <h1 className="content-title">课程列表</h1>
           <div className="content-list clearfix">
             {
-              lessonList.map(item => (
-                <Link className="btn content-item pull-left" key={item.id} to={`/lesson-detail/${item.id}/0`}>
-                  <div className="item-title">{item.name}</div>
-                  <div className="item-desc">这是一门方便灵活的程序语言</div>
+              cellList.map(item => (
+                <Link className="btn content-item pull-left" key={item.fileId} to={`/lesson-detail/${item.fileId}/0`}>
+                  <div className="item-title">{`${item.name}-${item.index}`}</div>
+                  <div className="item-desc">{item.desc}</div>
                 </Link>
               ))
             }

@@ -7,7 +7,7 @@ const webpackServerConfig = require('./webpack.server.config');
 
 // 清理发布目录
 gulp.task('clean', () => {
-  gulp.src('public', { read: false })
+  gulp.src(['public'], { read: false })
     .pipe(clean());
 });
 
@@ -37,9 +37,7 @@ gulp.task('watch', ['webpack:client', 'webpack:server'], () => {
 });
 
 // 启动测试服务器
-gulp.task('dev', ['clean', 'copy', 'webpack:client', 'webpack:server'], () => {
-  return run("npm run server:dev");
-});
+gulp.task('dev', ['clean', 'copy', 'webpack:client', 'webpack:server'], () => run('npm run server:dev'));
 
 // 打包服务器文件
 gulp.task('default', ['clean', 'copy', 'webpack:client', 'webpack:server']);

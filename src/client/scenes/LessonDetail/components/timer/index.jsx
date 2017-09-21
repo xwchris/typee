@@ -19,8 +19,15 @@ class timer extends Component {
   }
 
   // 获取时间
-  getTimer() {
+  getTime() {
     return this.state.currTime;
+  }
+
+  // 重置时间
+  resetTime() {
+    this.setState({
+      currTime: 0,
+    });
   }
 
   // 清除定时器

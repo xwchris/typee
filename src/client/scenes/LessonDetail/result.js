@@ -1,8 +1,8 @@
 export default {
-  // 课程ID
-  lessonId: '',
-  // 文件Index
-  fileIndex: 0,
+  // 文件ID
+  fileId: '',
+  // 分页ID
+  pageId: 0,
   // 总的字符数
   totalCount: 0,
   // 输入的字符

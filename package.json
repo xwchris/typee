@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/xwchris/typee#readme",
   "dependencies": {
+    "echarts": "^3.7.1",
     "express": "^4.15.4",
     "isomorphic-fetch": "^2.2.1",
     "pug": "^2.0.0-rc.3",

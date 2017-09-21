@@ -7,7 +7,7 @@ const webpackServerConfig = require('./webpack.server.config');
 
 // 清理发布目录
 gulp.task('clean', () => {
-  gulp.src('public', { read: false })
+  gulp.src(['public'], { read: false })
     .pipe(clean());
 });
 

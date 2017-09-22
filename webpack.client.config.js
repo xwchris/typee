@@ -95,6 +95,13 @@ module.exports = function webpackClientConfig(env = 'development') {
       }],
     },
     // 插件配置
-    plugins: getPlugins(env),
+    plugins: [
+      // 分离插件
+      new ExtractTextPlugin('static/style.css'),
+      // 热加载插件
+      new webpack.HotModuleReplacementPlugin(),
+      // 跳过编译时出错的代码并记录，使编译后运行时的包不会发生错误
+      new webpack.NoEmitOnErrorsPlugin(),
+    ],
   };
 };

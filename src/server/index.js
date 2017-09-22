@@ -16,27 +16,25 @@ import webpackClientConfig from '../../webpack.client.config';
 
 // 创建服务器实例
 const app = express();
-// webpack配置文件
-const compiler = webpack(webpackClientConfig());
 // 创建store
 const store = createStore(reducer, {});
+// webpack配置文件
+const compiler = webpack(webpackClientConfig());
 
-// 设置pug视图引擎
+// 设置视图引擎
 app.set('views', path.join(__dirname, '..', 'views'));
 app.set('view engine', 'pug');
 
-// 设置静态资源服务器
-app.use(express.static(path.join(__dirname, '../..', 'public')));
-
-// 如果是开发环境
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'development') {
   // 客户端热加载
   app.use(webpackDevMiddleware(compiler, {
-    noInfo: true,
-    // publicPath: webpackClientConfig.output.publicPath,
+    noInfo: true, publicPath: webpackClientConfig().output.publicPath,
   }));
   app.use(webpackHotMiddleware(compiler));
 }
+
+// 设置静态资源服务器
+app.use('/', express.static(path.join(__dirname, '../..', 'public')));
 
 // 路由设置
 app.get('*', (req, res) => {
@@ -59,4 +57,3 @@ app.get('*', (req, res) => {
 
 // 监听服务器3000端口
 app.listen(3000);
-

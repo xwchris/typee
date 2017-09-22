@@ -155,6 +155,9 @@ class LessonDetail extends Component {
     const arr = this.state.inputArray;
     const pointer = this.state.pointer;
     let countSpace = 1;
+    if (pointer - this.rowInitSpace <= 0) {
+      return;
+    }
     // 退格键
     if (e.keyCode === 8) {
       recordInput('delete');

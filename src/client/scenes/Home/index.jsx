@@ -11,7 +11,7 @@ const Home = () => (
       <div className="part-list">
         <div className="part-item">
           <div className="item-image">
-            <img className="image-src" src="./static/images/home-image-1.png" alt="展示图片1" />
+            <img className="image-src" src="./static/images/home-image-1.jpg" alt="展示图片1" />
           </div>
           <div className="item-text">
             <div className="text-title">详尽的练习报告</div>
@@ -28,12 +28,12 @@ const Home = () => (
             </div>
           </div>
           <div className="item-image pull-right">
-            <img className="image-src" src="./static/images/home-image-2.png" alt="展示图片2" />
+            <img className="image-src" src="./static/images/home-image-2.jpg" alt="展示图片2" />
           </div>
         </div>
         <div className="part-item">
           <div className="item-image">
-            <img className="image-src" src="./static/images/home-image-3.png" alt="展示图片3" />
+            <img className="image-src" src="./static/images/home-image-3.jpg" alt="展示图片3" />
           </div>
           <div className="item-text">
             <div className="text-title">高效的练习方法</div>

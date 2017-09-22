@@ -16,51 +16,44 @@ import webpackClientConfig from '../../webpack.client.config';
 
 // 创建服务器实例
 const app = express();
+// 创建store
+const store = createStore(reducer, {});
 // webpack配置文件
-const compiler = webpack(webpackClientConfig);
+const compiler = webpack(webpackClientConfig());
 
 // 设置视图引擎
 app.set('views', path.join(__dirname, '..', 'views'));
 app.set('view engine', 'pug');
 
-// 客户端热加载
-app.use(webpackDevMiddleware(compiler, {
-  noInfo: true, publicPath: webpackClientConfig.output.publicPath,
-}));
-app.use(webpackHotMiddleware(compiler));
+if (process.env.NODE_ENV === 'development') {
+  // 客户端热加载
+  app.use(webpackDevMiddleware(compiler, {
+    noInfo: true, publicPath: webpackClientConfig().output.publicPath,
+  }));
+  app.use(webpackHotMiddleware(compiler));
+}
 
 // 设置静态资源服务器
-app.use('/static', express.static(path.join(__dirname, '../..', 'public/static')));
+app.use('/', express.static(path.join(__dirname, '../..', 'public')));
 
-// 获取数据并进行服务端渲染
-getData({
-  url: 'http://api.ustudents.cn',
-  callback: (data) => {
-    const lessonList = data.lesson_list;
-    const preloadState = { lessonList };
-    const store = createStore(reducer, preloadState);
+// 路由设置
+app.get('*', (req, res) => {
+  const context = {};
+  const content = renderToString(
+    <Provider store={store}>
+      <StaticRouter location={req.url} context={context}>
+        {renderRoutes(routes)}
+      </StaticRouter>
+    </Provider>,
+  );
 
-    // 路由设置
-    app.get('*', (req, res) => {
-      const context = {};
-      const content = renderToString(
-        <Provider store={store}>
-          <StaticRouter location={req.url} context={context}>
-            {renderRoutes(routes)}
-          </StaticRouter>
-        </Provider>,
-      );
-
-      // 服务端渲染
-      res.render('index', {
-        title: 'typee',
-        content,
-        preloadState: JSON.stringify(store.getState()),
-      });
-    });
-  },
+  // 服务端渲染
+  res.render('index', {
+    title: 'typee',
+    content,
+    preloadState: JSON.stringify(store.getState()),
+  });
 });
 
 // 监听服务器3000端口
 app.listen(3000);
-

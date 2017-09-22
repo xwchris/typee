@@ -155,6 +155,9 @@ class LessonDetail extends Component {
     const arr = this.state.inputArray;
     const pointer = this.state.pointer;
     let countSpace = 1;
+    if (pointer - this.rowInitSpace <= 0) {
+      return;
+    }
     // 退格键
     if (e.keyCode === 8) {
       recordInput('delete');
@@ -206,7 +209,8 @@ class LessonDetail extends Component {
   }
 
   render() {
-    const { textArr, page, totalPage } = this.props.lessonDetail;
+    const lessonDetail = this.props.lessonDetail || {};
+    const { textArr = [], page = 0, totalPage = 0 } = lessonDetail;
     const last = (page + 1 === totalPage);
     return (
       <div className="lesson-detail-container">

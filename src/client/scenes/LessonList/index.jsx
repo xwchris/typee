@@ -1,25 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import getData from 'services/dataFuncs';
+import getData from './services/lessonListService';
 
 class LessonList extends Component {
   componentWillMount() {
-    getData({
-      url: 'http://api.ustudents.cn',
-      callback: (data) => {
-        // 请求错误
-        if (data.status === 1) {
-          window.createTip(data.error_message, 'error');
-        } else {
-          this.props.dispatch({
-            type: 'LESSON_LIST',
-            key: 'lessonList',
-            value: data.lesson_list,
-          });
-        }
-      },
-    });
+    // 请求数据
+    getData(this.props);
   }
 
   render() {

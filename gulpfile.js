@@ -1,34 +1,36 @@
 const gulp = require('gulp');
 const webpack = require('webpack');
-const clean = require('gulp-clean');
 const run = require('gulp-run');
+const del = require('del');
 const webpackClientConfig = require('./webpack.client.config');
 const webpackServerConfig = require('./webpack.server.config');
 
+const NODE_ENV = 'production';
+// const NODE_ENV = 'development';
+
 // 清理发布目录
 gulp.task('clean', () => {
-  gulp.src(['public'], { read: false })
-    .pipe(clean());
-});
-
-// 拷贝静态资源
-gulp.task('copy', ['clean'], () => {
-  gulp.src('src/client/images/*')
-    .pipe(gulp.dest('public/static/images'));
+  del(['public']);
 });
 
 // 打包客户端文件
 gulp.task('webpack:client', ['clean'], (callback) => {
-  webpack(webpackClientConfig, () => {
+  webpack(webpackClientConfig(NODE_ENV), () => {
     callback();
   });
 });
 
 // 打包服务器文件
 gulp.task('webpack:server', ['clean'], (callback) => {
-  webpack(webpackServerConfig, () => {
+  webpack(webpackServerConfig(NODE_ENV), () => {
     callback();
   });
+});
+
+// 拷贝静态资源
+gulp.task('copy', ['webpack:client', 'webpack:server'], () => {
+  gulp.src('src/client/images/*')
+    .pipe(gulp.dest('public/static/images'));
 });
 
 // 监听

@@ -10,6 +10,7 @@
   "scripts": {
     "lint": "eslint ./src --ext .js,.jsx",
     "clean": "rm -rf ./public",
+    "server": "node ./public/bundle.server.js",
     "server:dev": "NODE_ENV=development node ./public/bundle.server.js",
     "server:prod": "NODE_ENV=production node ./public/bundle.server.js"
   },
@@ -44,6 +45,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.7",
+    "del": "^3.0.0",
     "eslint": "^4.5.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-import-resolver-webpack": "^0.8.3",
@@ -52,7 +54,6 @@
     "eslint-plugin-react": "^7.3.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "gulp": "^3.9.1",
-    "gulp-clean": "^0.3.2",
     "gulp-run": "^1.7.1",
     "less": "^2.7.2",
     "less-loader": "^4.0.5",

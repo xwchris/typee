@@ -6,7 +6,6 @@ import { getClassName } from './mixins/helpers';
 import getData from './services/lessonDetailService';
 import result from './result';
 
-
 // 记录输入按键
 function recordInput(inputChar, type) {
   // 记录输入的各字符次数
@@ -29,13 +28,15 @@ class LessonDetail extends Component {
     this.rowInitSpace = 0;
     this.start = true;
     // 请求数据
-    getData(this.props);
+    getData(this.props, 'mount');
   }
 
   componentDidMount() {
-    // 处理键盘输入
-    window.onkeypress = e => this.handleKeyPress(e);
-    window.onkeydown = e => this.handleKeyDown(e);
+    if (window) {
+      // 处理键盘输入
+      window.onkeypress = e => this.handleKeyPress(e);
+      window.onkeydown = e => this.handleKeyDown(e);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -155,11 +156,13 @@ class LessonDetail extends Component {
     const arr = this.state.inputArray;
     const pointer = this.state.pointer;
     let countSpace = 1;
-    if (pointer - this.rowInitSpace <= 0) {
-      return;
-    }
     // 退格键
     if (e.keyCode === 8) {
+      // 首行头部禁止继续退格
+      if (pointer - this.rowInitSpace <= 0) {
+        return;
+      }
+      // 记录删除键
       recordInput('delete');
       while (pointer - countSpace >= 0 && (textArr[pointer - countSpace] === ' ' || textArr[pointer - countSpace] === '\n')) {
         countSpace += 1;
@@ -217,7 +220,9 @@ class LessonDetail extends Component {
         <Timer ref={(ele) => { this.timer = ele; }} />
         <div className="lesson-detail-content container">
           <pre className="code-box">
-            {textArr && textArr.map((item, index) => (<span key={`char_${index + 1}`} className={getClassName(index, item, this.state)}>{item}</span>)) }
+            <code>
+              {textArr && textArr.map((item, index) => (<span key={`char_${index + 1}`} className={getClassName(index, item, this.state)}>{item}</span>))}
+            </code>
           </pre>
           {
             this.props.showResult ? <Result last={last} /> : <div />

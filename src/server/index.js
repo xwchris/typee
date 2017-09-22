@@ -9,7 +9,6 @@ import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import getData from 'services/dataFuncs';
 import reducer from '../reducer';
 import routes from '../client/routes';
 import webpackClientConfig from '../../webpack.client.config';

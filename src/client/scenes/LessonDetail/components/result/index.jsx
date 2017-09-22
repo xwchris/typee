@@ -5,6 +5,14 @@ import echarts from 'echarts';
 import { calculateResult } from '../../mixins/helpers';
 
 class Result extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      // true为Wmp False为Kmp
+      WmpOrKmp: true,
+    };
+  }
   componentDidMount() {
     // 结果对象
     // 基于准备好的dom，初始化echarts实例
@@ -61,12 +69,21 @@ class Result extends Component {
         <h1 className="result-title">练习报告</h1>
         <div className="result-content clearfix">
           <div className="left-part pull-left">
-            <div className="item item-wpm">WMP: {this.formatResult.wpm}</div>
-            <div className="item">应输入总字符数: {this.formatResult.totalCount}</div>
-            <div className="item">输入总字符数: {this.formatResult.inputCount}</div>
-            <div className="item">错误总字符数: {this.formatResult.errorCount}</div>
-            <div className="item">退格次数: {this.formatResult.deleteCount}</div>
-            <div className="item">无效输入比例: {this.formatResult.invalidRate}</div>
+            <div
+              className="btn item item-wpm"
+              role="button"
+              onClick={() => { this.setState({ WmpOrKmp: !this.state.WmpOrKmp }); }}
+            >
+              {
+                this.state.WmpOrKmp ? `WMP: ${this.formatResult.wpm}`
+                  : `KMP: ${this.formatResult.wpm * 5}`
+              }
+            </div>
+            <div className="btn item">应输入总字符数: {this.formatResult.totalCount}</div>
+            <div className="btn item">输入总字符数: {this.formatResult.inputCount}</div>
+            <div className="btn item">错误总字符数: {this.formatResult.errorCount}</div>
+            <div className="btn item">退格次数: {this.formatResult.deleteCount}</div>
+            <div className="btn item">无效输入比例: {this.formatResult.invalidRate}</div>
           </div>
           <div className="right-part pull-left" ref={(ele) => { this.chartsArea = ele; }} />
         </div>

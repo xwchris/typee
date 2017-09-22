@@ -5,8 +5,8 @@ const del = require('del');
 const webpackClientConfig = require('./webpack.client.config');
 const webpackServerConfig = require('./webpack.server.config');
 
-// const NODE_ENV = 'production';
-const NODE_ENV = 'development';
+const NODE_ENV = 'production';
+// const NODE_ENV = 'development';
 
 // 清理发布目录
 gulp.task('clean', () => {

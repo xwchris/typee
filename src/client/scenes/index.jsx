@@ -5,15 +5,6 @@ import Footer from '../components/Footer';
 import Tip from '../components/Tip';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-
-    };
-  }
-
-
   componentDidMount() {
     // 如果window存在
     if (window) {

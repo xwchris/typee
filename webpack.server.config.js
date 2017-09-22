@@ -78,7 +78,13 @@ module.exports = function webpackServerConfig(env) {
         exclude: path.resolve(__dirname, 'node_modules'),
         // 加载选项
         options: {
-          presets: ['es2015', 'react'],
+          presets: [
+            ['env', {
+              targets: {
+                node: 'current',
+              },
+            }], 'react',
+          ],
         },
       }],
     },

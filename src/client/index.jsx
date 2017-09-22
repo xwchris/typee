@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import 'babel-polyfill';
 import routes from './routes';
 import reducer from '../reducer';
 

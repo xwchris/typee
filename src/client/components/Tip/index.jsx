@@ -44,7 +44,6 @@ class Tip extends Component {
         <span
           className="btn close-btn"
           role="button"
-          tabIndex={0}
           onClick={() => { this.closeTip(); }}
         />
       </div>

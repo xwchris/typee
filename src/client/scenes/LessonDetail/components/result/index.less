@@ -1,0 +1,58 @@
+.component-result {
+  position: relative;
+  margin-top: 50px;
+  padding: 40px;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 5px 5px 30px 5px #cccccc;
+
+  .result-title {
+    margin-bottom: 40px;
+    font-size: 46px;
+    line-height: 56px;
+    text-align: center;
+    font-weight: bold;
+    color: @main;
+  }
+
+  .result-content {
+
+    .left-part, .right-part {
+      text-align: center;
+      width: 50%;
+      height: 400px;   
+      color: #666666;   
+
+      .item {
+        font-size: 26px;
+        line-height: 56px;
+        font-weight: bold;
+      }
+
+      .item-wpm {
+        font-size: 50px;
+        line-height: 68px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  .btn-next {
+    display: block;
+    margin: 30px auto 0;
+    width: 200px;
+    height: 50px;
+    color: @white;
+    background-color: @main;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 20px;
+    line-height: 53px;
+    text-decoration: none;
+    transition: all .3s;
+
+    &:hover {
+      background-color: #0375D3;
+    }
+  }
+}

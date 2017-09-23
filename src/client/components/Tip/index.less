@@ -1,0 +1,53 @@
+.component-tip {
+  position: fixed;
+  display: inline-block;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  padding: 10px 30px;
+  background: @main;
+  z-index: @zIndexLevel4;
+  border-radius: 3px;
+
+  .tip-text {
+    color: @white;
+    font-size: 15px;
+    line-height: 18px;
+  }
+
+  .close-btn {
+    position: absolute;
+    display: block;
+    right: 5px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+
+    &:after, &:before {
+      position: absolute;
+      display: block;
+      content: "";
+      left: 5px;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      background: #87ceeb;
+    }
+
+    &:after {
+      transform: rotate(45deg);
+    }
+
+    &:before {
+      transform: rotate(-45deg);
+    }
+  }
+
+  &.error {
+    background: #D34242;
+
+    .close-btn:after, .close-btn:before {
+      background: #f79094;
+    }
+  }
+}

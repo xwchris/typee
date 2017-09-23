@@ -1,0 +1,52 @@
+.lesson-detail-container {
+  font-family: "Ubuntu Mono",monospace;
+
+  .lesson-detail-content {
+    padding: 40px 0;
+
+    .code-box {
+      padding: 20px;
+      color: #777777;
+      font-size: 15px;
+      border-radius: 8px;
+      background: #ffffff;
+      box-shadow: 5px 5px 30px 5px #cccccc;
+      
+      span {
+        padding: 1px 0;
+        line-height: 20px;
+
+        &.active {
+          background: #04a204;
+          color: @white;
+
+          &.enter:before {
+            content: 'Enter';
+            color: white;
+            padding: 0 5px;
+          }
+        }
+        
+        &.error {
+          color: red;
+          font-weight: bold;
+
+          &.space{
+            background: red;
+          }
+
+          &.enter:before {
+            content: 'Enter';
+            color: white;
+            padding: 0 5px;
+            background: red;
+          }
+        }
+
+        &.pass {
+          color: #7e02c7;
+        }
+      }
+    }
+  }
+}

@@ -9,7 +9,6 @@ import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import getData from 'services/dataFuncs';
 import reducer from '../reducer';
 import routes from '../client/routes';
 import webpackClientConfig from '../../webpack.client.config';
@@ -34,7 +33,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // 设置静态资源服务器
-app.use('/', express.static(path.join(__dirname, '../..', 'public')));
+app.use('/', express.static(path.join(__dirname, '../..', 'public'), { maxAge: '7d' }));
 
 // 路由设置
 app.get('*', (req, res) => {
@@ -49,7 +48,7 @@ app.get('*', (req, res) => {
 
   // 服务端渲染
   res.render('index', {
-    title: 'typee',
+    title: 'Typee-稳步提高打字速度',
     content,
     preloadState: JSON.stringify(store.getState()),
   });

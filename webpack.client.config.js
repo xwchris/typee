@@ -9,7 +9,7 @@ function getPlugins(env) {
   if (env === 'development') {
     return [
       // 分离插件
-      new ExtractTextPlugin('static/style.css'),
+      new ExtractTextPlugin('style.css'),
       // 热加载插件
       new webpack.HotModuleReplacementPlugin(),
       // 跳过编译时出错的代码并记录，使编译后运行时的包不会发生错误
@@ -19,7 +19,7 @@ function getPlugins(env) {
   // 如果是生产环境
   return [
     // 分离插件
-    new ExtractTextPlugin('static/style.css'),
+    new ExtractTextPlugin('style.css'),
     // 定义环境
     new webpack.DefinePlugin({
       'process.env': {
@@ -84,7 +84,13 @@ module.exports = function webpackClientConfig(env = 'development') {
         loader: 'babel-loader',
         // 加载选项
         options: {
-          presets: ['es2015', 'react'],
+          presets: [
+            ['env', {
+              targets: {
+                browsers: ['last 2 versions', 'safari >= 7'],
+              },
+            }], 'react',
+          ],
         },
       }, {
         test: /\.less$/,
@@ -95,13 +101,6 @@ module.exports = function webpackClientConfig(env = 'development') {
       }],
     },
     // 插件配置
-    plugins: [
-      // 分离插件
-      new ExtractTextPlugin('static/style.css'),
-      // 热加载插件
-      new webpack.HotModuleReplacementPlugin(),
-      // 跳过编译时出错的代码并记录，使编译后运行时的包不会发生错误
-      new webpack.NoEmitOnErrorsPlugin(),
-    ],
+    plugins: getPlugins(env),
   };
 };

@@ -12,25 +12,15 @@ class LessonList extends Component {
   render() {
     // 课程列表
     const { lessonList = [] } = this.props;
-    // 取出所有文件列表
-    const list = lessonList.map((item) => {
-      const cell = item.file_ids.map((fileId, index) => ({ fileId, name: item.name, index: index + 1, desc: '这是一门方便灵活的程序语言' }));
-      return cell;
-    });
-    // 扁平化数组
-    let cellList = [];
-    list.forEach((item) => {
-      cellList = cellList.concat(item);
-    });
     return (
       <div className="lesson-list-container">
         <div className="lesson-list-content container">
           <div className="content-list clearfix">
             {
-              cellList.map(item => (
-                <Link className="btn content-item pull-left" key={item.fileId} to={`/lesson-detail/${item.fileId}/0`}>
-                  <div className="item-title">{`${item.name}-${item.index}`}</div>
-                  <div className="item-desc">{item.desc}</div>
+              lessonList.map(item => (
+                <Link className="btn content-item pull-left" key={item.id} to={`/lesson-detail/${item.file_id}/0`}>
+                  <div className="item-title">{item.name}</div>
+                  <div className="item-desc">这是一门简单灵活的语言</div>
                 </Link>
               ))
             }

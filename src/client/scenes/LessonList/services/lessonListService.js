@@ -6,6 +6,8 @@ export default function getLessonList(props) {
 
   getData({
     url: config.api,
+    key: 'lessonList',
+    props,
     callback: (data) => {
       // 请求错误
       if (data.status === 1) {

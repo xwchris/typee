@@ -54,4 +54,9 @@ export function parseTime(seconds) {
   return `${minute < 10 ? `0${minute}` : minute}:${second < 10 ? `0${second}` : second}`;
 }
 
+// 判断是否是数字
+export function isIntNumber(str) {
+  return !isNaN(parseInt(str, 10));
+}
+
 export default getClassName;

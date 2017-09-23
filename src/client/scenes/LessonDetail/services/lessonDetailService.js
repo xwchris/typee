@@ -11,7 +11,9 @@ export default function getLessonDetail(props) {
   }
   const dispatch = props.dispatch;
   getData({
-    url: `${config.api}?file_id=${fileId}&page_id=${pageId}`,
+    url: `${config.api}/file?file_id=${fileId}&page_id=${pageId}`,
+    key: 'lessonList',
+    props,
     callback: (data) => {
       // 请求错误
       if (data.status === 1) {

@@ -63,7 +63,7 @@ class LessonDetail extends Component {
     result.errorChars = {};
     // 初始化首部空格
     for (let i = 0; i < textArr.length; i += 1) {
-      if (textArr[i] === ' ') {
+      if (textArr[i] === ' ' || textArr[i] === '\n') {
         this.rowInitSpace += 1;
         inputArray.push('pass');
       } else {

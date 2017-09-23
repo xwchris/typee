@@ -9,7 +9,7 @@ function getPlugins(env) {
   if (env === 'development') {
     return [
       // 分离插件
-      new ExtractTextPlugin('static/style.css'),
+      new ExtractTextPlugin('style.css'),
       // 热加载插件
       new webpack.HotModuleReplacementPlugin(),
       // 跳过编译时出错的代码并记录，使编译后运行时的包不会发生错误
@@ -19,7 +19,7 @@ function getPlugins(env) {
   // 如果是生产环境
   return [
     // 分离插件
-    new ExtractTextPlugin('static/style.css'),
+    new ExtractTextPlugin('style.css'),
     // 定义环境
     new webpack.DefinePlugin({
       'process.env': {

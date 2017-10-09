@@ -1,4 +1,4 @@
-import getData from 'services/dataFuncs';
+import { getData } from 'services/dataFuncs';
 import { isIntNumber } from '../mixins/helpers';
 import config from 'config';
 

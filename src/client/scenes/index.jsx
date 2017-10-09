@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { renderRoutes } from 'react-router-config';
+import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Tip from '../components/Tip';
+import Login from '../components/Login';
+import Regist from '../components/Regist';
 
 class App extends Component {
   componentDidMount() {
@@ -21,6 +24,8 @@ class App extends Component {
   render() {
     return (
       <div className="index-container">
+        <Login />
+        <Regist />
         <Tip ref={(ele) => { this.tip = ele; }} />
         <Header />
         <main className="main">
@@ -32,4 +37,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect()(App);

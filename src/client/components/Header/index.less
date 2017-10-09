@@ -6,6 +6,7 @@
 
   .logo-box {
     display: block;
+    margin-right: 50px;
     color: @main;
     font-size: 24px;
     font-weight: bold;
@@ -13,7 +14,7 @@
     text-decoration: none;
   }
 
-  .nav-list {
+  .nav-box {
 
     .nav-item {
       display: inline-block;
@@ -26,6 +27,26 @@
       &:hover, &.active {
         border-bottom: 3px solid @main;
       }
+    }
+  }
+
+  .login-box {
+    height: 100%;
+    font-size: 14px;
+    line-height: 60px;
+    color: @font-color;
+
+    .login-btn, .regist-btn {
+      color: @font-color;
+      text-decoration: none;
+
+      &:hover {
+        color: @main;
+      }
+    }
+
+    .line-divide {
+      margin: 0 10px;
     }
   }
 }

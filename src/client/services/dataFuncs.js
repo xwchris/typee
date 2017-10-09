@@ -9,7 +9,8 @@ function getJSON(url) {
   });
 }
 
-const getData = async function getText({ url = '', key, props, callback }) {
+// 获取数据
+export const getData = async function getText({ url = '', key, props, callback }) {
   // 如果已有该数据则不请求
   if (props[key]) {
     return props[key];
@@ -22,4 +23,22 @@ const getData = async function getText({ url = '', key, props, callback }) {
   return data;
 };
 
-export default getData;
+// 发送请求
+export const sendRequest = function sendRequest({ method = 'GET', value = {}, url = '', callback = () => {} }) {
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json;charset=UTF-8');
+  const request = new Request(url, {
+    method,
+    mode: 'cors',
+    body: JSON.stringify(value),
+    headers,
+  });
+  fetch(request)
+    .then(response => response.json())
+    .then(response => callback(response))
+    .catch((error) => {
+      console.error(error);
+      // 返回空对象
+      return {};
+    });
+};

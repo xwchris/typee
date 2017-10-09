@@ -1,4 +1,4 @@
-import getData from 'services/dataFuncs';
+import { getData } from 'services/dataFuncs';
 import config from 'config';
 
 export default function getLessonList(props) {

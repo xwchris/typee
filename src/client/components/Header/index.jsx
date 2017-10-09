@@ -12,7 +12,7 @@ class Header extends Component {
   }
   // 渲染
   render() {
-    const { dispatch } = this.props;
+    const { dispatch, isLoggedin } = this.props;
 
     return (
       <div className="component-header">
@@ -31,7 +31,7 @@ class Header extends Component {
               反馈问题
             </NavLink>
           </div>
-          <div className="login-box pull-right">
+          <div className={`login-box pull-right ${isLoggedin ? ' hidden' : ''}`}>
             <span
               className="login-btn btn"
               role="button"

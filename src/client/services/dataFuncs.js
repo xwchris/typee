@@ -26,11 +26,11 @@ export const getData = async function getText({ url = '', key, props, callback }
 // 发送请求
 export const sendRequest = function sendRequest({ method = 'GET', value = {}, url = '', callback = () => {} }) {
   const headers = new Headers();
-  headers.append('Content-Type', 'application/json;charset=UTF-8');
+  headers.append('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
   const request = new Request(url, {
     method,
     mode: 'cors',
-    body: JSON.stringify(value),
+    body: value,
     headers,
   });
   fetch(request)

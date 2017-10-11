@@ -12,7 +12,7 @@ class Header extends Component {
   }
   // 渲染
   render() {
-    const { dispatch, isLoggedin } = this.props;
+    const { dispatch, isLoggedin, username = '' } = this.props;
 
     return (
       <div className="component-header">
@@ -31,23 +31,31 @@ class Header extends Component {
               反馈问题
             </NavLink>
           </div>
-          <div className={`login-box pull-right ${isLoggedin ? ' hidden' : ''}`}>
-            <span
-              className="login-btn btn"
-              role="button"
-              onClick={() => showLoginOrRegistPopup(dispatch, 'showLoginPopup', true)}
-            >
-            登录
-            </span>
-            <span className="line-divide">|</span>
-            <span
-              className="regist-btn btn"
-              role="button"
-              onClick={() => showLoginOrRegistPopup(dispatch, 'showRegistPopup', true)}
-            >
-            注册
-            </span>
-          </div>
+          {
+            !isLoggedin ? (
+              <div className="login-box pull-right">
+                <span
+                  className="login-btn btn"
+                  role="button"
+                  onClick={() => showLoginOrRegistPopup(dispatch, 'showLoginPopup', true)}
+                >
+                  登录
+                </span>
+                <span className="line-divide">|</span>
+                <span
+                  className="regist-btn btn"
+                  role="button"
+                  onClick={() => showLoginOrRegistPopup(dispatch, 'showRegistPopup', true)}
+                >
+                  注册
+                </span>
+              </div>
+            ) : (
+              <div className="login-box pull-right">
+                <NavLink className="login-btn btn" to="/user-center">Hi, { username }</NavLink>
+              </div>
+            )
+          }
         </div>
       </div>
     );
@@ -57,5 +65,6 @@ class Header extends Component {
 export default connect(
   state => ({
     isLoggedin: state.isLoggedin,
+    username: state.username,
   }),
 )(Header);

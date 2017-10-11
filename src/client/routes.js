@@ -4,6 +4,7 @@ import LessonDetail from './scenes/LessonDetail';
 import Home from './scenes/Home';
 import ProblemFeedback from './scenes/ProblemFeedback';
 import AboutUs from './scenes/AboutUs';
+import UserCenter from './scenes/UserCenter';
 
 const routes = [
   {
@@ -30,6 +31,10 @@ const routes = [
         // 关于我们
         path: '/about-us',
         component: AboutUs,
+      }, {
+        // 用户中心
+        path: '/user-center',
+        component: UserCenter,
       },
     ],
   },

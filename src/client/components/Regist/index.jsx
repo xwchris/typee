@@ -74,7 +74,7 @@ class Regist extends Component {
                 placeholder="确认密码"
               />
               <div
-                className="blue-btn btn"
+                className="blue-btn"
                 role="button"
                 onClick={() => this.regist()}
               >

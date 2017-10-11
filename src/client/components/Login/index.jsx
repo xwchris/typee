@@ -33,7 +33,7 @@ class Login extends Component {
                 placeholder="密码"
               />
               <div
-                className="blue-btn btn"
+                className="blue-btn"
                 role="button"
                 onClick={() => this.login()}
               >

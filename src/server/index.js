@@ -8,6 +8,7 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import { createStore } from 'redux';
+import cookieParser from 'cookie-parser';
 import { Provider } from 'react-redux';
 import reducer from '../reducer';
 import routes from '../client/routes';
@@ -35,8 +36,12 @@ if (process.env.NODE_ENV === 'development') {
 // 设置静态资源服务器
 app.use('/', express.static(path.join(__dirname, '../..', 'public'), { maxAge: '7d' }));
 
+// 设置cookie
+app.use(cookieParser());
+
 // 路由设置
 app.get('*', (req, res) => {
+  console.info('cookie', req.cookies);
   const context = {};
   const content = renderToString(
     <Provider store={store}>

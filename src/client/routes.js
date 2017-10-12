@@ -5,6 +5,7 @@ import Home from './scenes/Home';
 import ProblemFeedback from './scenes/ProblemFeedback';
 import AboutUs from './scenes/AboutUs';
 import UserCenter from './scenes/UserCenter';
+import Admin from './scenes/Admin';
 
 const routes = [
   {
@@ -35,6 +36,10 @@ const routes = [
         // 用户中心
         path: '/user-center',
         component: UserCenter,
+      }, {
+        // 管理后台
+        path: '/admin',
+        component: Admin,
       },
     ],
   },

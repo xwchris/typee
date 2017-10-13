@@ -2,7 +2,10 @@ import fetch from 'isomorphic-fetch';
 
 // 获取文本
 function getJSON(url) {
-  return fetch(url).then(response => (response.json())).catch((error) => {
+  return fetch(url, {
+    method: 'GET',
+    credentials: 'include',
+  }).then(response => (response.json())).catch((error) => {
     console.error(error);
     // 返回空对象
     return {};
@@ -27,6 +30,7 @@ export const getData = async function getText({ url = '', key, props, callback }
 export const sendRequest = function sendRequest({ method = 'GET', value = {}, url = '', callback = () => {} }) {
   const headers = new Headers();
   headers.append('Content-Type', 'application/json;charset=UTF-8');
+
   const request = new Request(url, {
     method,
     mode: 'cors',

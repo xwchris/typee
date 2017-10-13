@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import BaseInfo from './components/BaseInfo';
+import getData from './services/getUserInfo';
 
 class UserCenter extends Component {
   constructor(props) {
@@ -10,6 +12,12 @@ class UserCenter extends Component {
     };
   }
 
+  componentWillMount() {
+    // 获取数据
+    getData(this.props);
+  }
+
+  // 渲染
   render() {
     // 切换面板
     const tabData = [
@@ -24,6 +32,9 @@ class UserCenter extends Component {
         children: <div />,
       },
     ];
+
+    const { userInfo } = this.props;
+    console.log('userInfo', userInfo);
 
     return (
       <div className="user-center-container container">
@@ -63,4 +74,8 @@ class UserCenter extends Component {
   }
 }
 
-export default UserCenter;
+export default connect(
+  state => ({
+    userInfo: state.userInfo,
+  }),
+)(UserCenter);

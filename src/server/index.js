@@ -41,8 +41,9 @@ app.use(cookieParser());
 
 // 路由设置
 app.get('*', (req, res) => {
-  console.info('cookie', req.cookies);
-  const context = {};
+  const context = {
+    cookies: req.cookies,
+  };
   const content = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.url} context={context}>

@@ -17,10 +17,10 @@ class LessonList extends Component {
         <div className="lesson-list-content container">
           <div className="content-list clearfix">
             {
-              lessonList.map(item => (
-                <Link className="btn content-item pull-left" key={item.id} to={`/lesson-detail/${item.file_id}/0`}>
+              lessonList.map((item, index) => (
+                <Link className="btn content-item pull-left" key={`lesson_${item.lesson_id || index + 1}`} to={`/lesson-detail/${item.file_id}/0`}>
                   <div className="item-title">{item.name}</div>
-                  <div className="item-desc">这是一门简单灵活的语言</div>
+                  <div className="item-desc">{item.notes || '简明灵活的语言'}</div>
                 </Link>
               ))
             }

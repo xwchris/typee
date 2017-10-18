@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import { renderRoutes } from 'react-router-config';
-import { connect } from 'react-redux';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Tip from '../components/Tip';
-import Login from '../components/Login';
-import Regist from '../components/Regist';
+import Tip from '../../components/Tip';
 
-class App extends Component {
+class Admin extends Component {
   componentDidMount() {
     // 如果window存在
     if (document) {
@@ -23,18 +18,14 @@ class App extends Component {
 
   render() {
     return (
-      <div className="index-container">
-        <Login />
-        <Regist />
-        <Tip ref={(ele) => { this.tip = ele; }} />
-        <Header />
+      <div className="admin-container">
+        <Tip />
         <main className="main">
           {renderRoutes(this.props.route.routes)}
         </main>
-        <Footer />
       </div>
     );
   }
 }
 
-export default connect()(App);
+export default Admin;

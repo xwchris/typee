@@ -1,0 +1,46 @@
+.admin-login-container {
+  position: relative;
+  height: 100vh;
+  background: @main;
+
+  .login-box {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    .login-title {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 32px;
+      line-height: 40px;
+      font-weight: bold;
+      color: @white;
+    }
+
+    .input-text {
+      margin-bottom: 20px;
+      padding: 0 10px;
+      width: 100%;
+      height: 40px;
+      border: 1px solid @border;
+      border-radius: 5px;
+      line-height: 20px;
+      font-size: 16px;
+    }
+
+    .submit-btn {
+      text-align: center;
+      height: 40px;
+      line-height: 40px;
+      font-size: 16px;
+      border-radius: 5px;
+      background-color: @white;
+      color: @main;
+
+      &:hover {
+        background-color: #eeeeee;
+      }
+    }
+  }
+}

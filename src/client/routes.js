@@ -6,10 +6,26 @@ import ProblemFeedback from './scenes/ProblemFeedback';
 import AboutUs from './scenes/AboutUs';
 import UserCenter from './scenes/UserCenter';
 import Admin from './scenes/Admin';
+import AdminHome from './scenes/Admin/scenes/Home';
+import AdminLogin from './scenes/Admin/scenes/Login';
 
 const routes = [
   {
+    component: Admin,
+    path: '/admin',
+    routes: [
+      {
+        component: AdminHome,
+        exact: true,
+        path: '/admin',
+      }, {
+        component: AdminLogin,
+        path: '/admin/login',
+      },
+    ],
+  }, {
     component: App,
+    path: '/',
     routes: [
       {
         // 主页
@@ -36,10 +52,6 @@ const routes = [
         // 用户中心
         path: '/user-center',
         component: UserCenter,
-      }, {
-        // 管理后台
-        path: '/admin',
-        component: Admin,
       },
     ],
   },

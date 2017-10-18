@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/xwchris/typee#readme",
   "dependencies": {
+    "antd": "^2.13.6",
     "babel-polyfill": "^6.26.0",
     "cookie-parser": "^1.4.3",
     "echarts": "^3.7.1",

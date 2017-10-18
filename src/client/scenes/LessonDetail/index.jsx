@@ -28,11 +28,11 @@ class LessonDetail extends Component {
     this.rowInitSpace = 0;
     this.start = true;
     // 请求数据
-    getData(this.props, 'mount');
+    getData(this.props);
   }
 
   componentDidMount() {
-    if (window) {
+    if (document) {
       // 处理键盘输入
       window.onkeypress = e => this.handleKeyPress(e);
       window.onkeydown = e => this.handleKeyDown(e);

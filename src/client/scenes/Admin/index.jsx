@@ -5,7 +5,7 @@ import Tip from '../../components/Tip';
 class Admin extends Component {
   componentDidMount() {
     // 如果window存在
-    if (window) {
+    if (document) {
       // 设置提示框函数
       window.createTip = (text, type) => { this.createTip(text, type); };
     }

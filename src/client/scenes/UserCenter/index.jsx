@@ -33,9 +33,6 @@ class UserCenter extends Component {
       },
     ];
 
-    const { userInfo } = this.props;
-    console.log('userInfo', userInfo);
-
     return (
       <div className="user-center-container container">
         <div className="inner-box clearfix container">
@@ -74,8 +71,4 @@ class UserCenter extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    userInfo: state.userInfo,
-  }),
-)(UserCenter);
+export default connect()(UserCenter);

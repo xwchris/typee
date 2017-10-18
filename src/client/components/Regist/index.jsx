@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { createTip } from 'mixin';
 import Popup from '../Popup';
 import registService from './services/registService';
 
@@ -40,16 +41,16 @@ class Regist extends Component {
         value: this.form.confirmPassword.value.trim(),
         errorMsg: '密码不能为空',
         validMsg: '两次密码不一致',
-        valid: () => (this.value === validateMap.password.value),
+        valid: () => (this.form.confirmPassword.value.trim() === validateMap.password.value),
       },
     };
 
     return Object.keys(validateMap).every((item) => {
-      if (validateMap[item].value === '') {
-        window.createTip(validateMap[item].errorMsg, 'error');
+      if (!validateMap[item].value) {
+        createTip(validateMap[item].errorMsg, 'error');
         return false;
-      } else if (validateMap[item].valid && validateMap[item].valid()) {
-        window.createTip(validateMap[item].validMsg, 'error');
+      } else if (validateMap[item].valid && !validateMap[item].valid()) {
+        createTip(validateMap[item].validMsg, 'error');
         return false;
       }
       return true;

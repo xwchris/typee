@@ -6,7 +6,7 @@ import loginService from './services/loginService';
 class Login extends Component {
   // 登录
   login() {
-    loginService(this.props.dispatch, {
+    loginService(this.props, {
       login_card: this.username.value.trim(),
       password: this.password.value.trim(),
     });

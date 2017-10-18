@@ -11,7 +11,6 @@ import reducer from '../reducer';
 // 初始state
 const preloadState = window.INITIAL_STATE;
 const store = createStore(reducer, preloadState);
-
 const AppRouter = () => (
   <Provider store={store}>
     <BrowserRouter>

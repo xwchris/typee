@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, withRouter } from 'react-router-dom';
 import showLoginOrRegistPopup from 'services/loginService';
 
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.setate = {
+    this.state = {
 
     };
   }
   // 渲染
   render() {
-    const { dispatch, isLoggedin, username = '' } = this.props;
+    const { dispatch, isLoggedin, userInfo = '' } = this.props;
 
     return (
       <div className="component-header">
@@ -52,7 +52,7 @@ class Header extends Component {
               </div>
             ) : (
               <div className="login-box pull-right">
-                <NavLink className="login-btn btn" to="/user-center">Hi, { username }</NavLink>
+                <NavLink className="login-btn btn" to="/user-center">Hi, { userInfo.name || '' }</NavLink>
               </div>
             )
           }
@@ -62,9 +62,9 @@ class Header extends Component {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   state => ({
     isLoggedin: state.isLoggedin,
-    username: state.username,
+    userInfo: state.userInfo,
   }),
-)(Header);
+)(Header));

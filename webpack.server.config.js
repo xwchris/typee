@@ -63,6 +63,7 @@ module.exports = function webpackServerConfig(env) {
         scenes: path.resolve(__dirname, './src/client/scenes'),
         services: path.resolve(__dirname, './src/client/services'),
         styles: path.resolve(__dirname, './src/client/styles'),
+        mixin$: path.resolve(__dirname, 'src/client/mixins.js'),
         config$: path.resolve(__dirname, 'src/config.js'),
       },
     },

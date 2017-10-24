@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createTip } from 'mixin';
+import { message } from 'antd';
 import Popup from '../Popup';
 import registService from './services/registService';
 
@@ -47,10 +47,10 @@ class Regist extends Component {
 
     return Object.keys(validateMap).every((item) => {
       if (!validateMap[item].value) {
-        createTip(validateMap[item].errorMsg, 'error');
+        message.error(validateMap[item].errorMsg);
         return false;
       } else if (validateMap[item].valid && !validateMap[item].valid()) {
-        createTip(validateMap[item].validMsg, 'error');
+        message.error(validateMap[item].validMsg);
         return false;
       }
       return true;

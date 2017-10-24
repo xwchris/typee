@@ -92,6 +92,9 @@ module.exports = function webpackClientConfig(env = 'development') {
               },
             }], 'react',
           ],
+          plugins: [
+            ['import', { libraryName: 'antd', style: true }], // `style: true` 会加载 less 文件
+          ],
         },
       }, {
         test: /\.less$/,

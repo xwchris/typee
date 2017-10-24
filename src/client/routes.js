@@ -1,7 +1,6 @@
 import App from './scenes';
 import LessonList from './scenes/LessonList';
 import LessonDetail from './scenes/LessonDetail';
-import Home from './scenes/Home';
 import ProblemFeedback from './scenes/ProblemFeedback';
 import AboutUs from './scenes/AboutUs';
 import UserCenter from './scenes/UserCenter';
@@ -28,13 +27,9 @@ const routes = [
     path: '/',
     routes: [
       {
-        // 主页
+        // 课程列表页
         path: '/',
         exact: true,
-        component: Home,
-      }, {
-        // 课程列表页
-        path: '/lesson-list',
         component: LessonList,
       }, {
         // 课程详情页

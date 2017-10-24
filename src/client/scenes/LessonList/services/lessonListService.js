@@ -1,6 +1,6 @@
+import { message } from 'antd';
 import getData from 'services/dataFuncs';
 import config from 'config';
-import { createTip } from 'mixin';
 
 export default (props) => {
   const { dispatch } = props;
@@ -8,7 +8,7 @@ export default (props) => {
   const callback = (data) => {
     // 请求错误
     if (data.status === 1) {
-      createTip(data.error_message, 'error');
+      message.error(data.error_message);
     } else {
       dispatch({
         type: 'LESSON_LIST',

@@ -1,63 +1,61 @@
 import React, { Component } from 'react';
+import { Menu, Row, Col } from 'antd';
 import { connect } from 'react-redux';
-import { NavLink, Link, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import showLoginOrRegistPopup from 'services/loginService';
 
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = {
 
-    };
+    this.state = {};
   }
-  // 渲染
+
   render() {
     const { dispatch, isLoggedin, userInfo = '' } = this.props;
 
     return (
-      <div className="component-header">
-        <div className="container clearfix">
-          <Link className="logo-box btn pull-left" to="/">Typee</Link>
-          <div className="nav-box pull-left">
-            <NavLink className="nav-item btn" exact activeClassName="active" to="/">首页</NavLink>
-            <NavLink
-              className="nav-item btn"
-              activeClassName="active"
-              to="/lesson-list"
-            >
-            课程
-            </NavLink>
-            <NavLink className="nav-item btn" activeClassName="active" to="/problem-feedback">
-              反馈问题
-            </NavLink>
-          </div>
-          {
-            !isLoggedin ? (
-              <div className="login-box pull-right">
-                <span
-                  className="login-btn btn"
-                  role="button"
-                  onClick={() => showLoginOrRegistPopup(dispatch, 'showLoginPopup', true)}
-                >
-                  登录
-                </span>
-                <span className="line-divide">|</span>
-                <span
-                  className="regist-btn btn"
-                  role="button"
-                  onClick={() => showLoginOrRegistPopup(dispatch, 'showRegistPopup', true)}
-                >
-                  注册
-                </span>
-              </div>
-            ) : (
-              <div className="login-box pull-right">
-                <NavLink className="login-btn btn" to="/user-center">Hi, { userInfo.name || '' }</NavLink>
-              </div>
-            )
-          }
-        </div>
-      </div>
+      <header className="component-header">
+        <Row>
+          <Col md={4} lg={3}>
+            <Link className="logo" to="/">Typee</Link>
+          </Col>
+          <Col md={17} lg={19}>
+            <Menu className="nav" theme="light" mode="horizontal" defaultSelectedKeys={['2']}>
+              <Menu.Item key="nav-1">
+                <Link to="/" exact>课程列表</Link>
+              </Menu.Item>
+              <Menu.Item key="nav-2">
+                <Link to="/other">其他页面</Link>
+              </Menu.Item>
+            </Menu>
+          </Col>
+          <Col md={3} lg={2}>
+            {
+              !isLoggedin ? (
+                <div>
+                  <span
+                    className="btn login-btn"
+                    role="button"
+                    onClick={() => showLoginOrRegistPopup(dispatch, 'showLoginPopup', true)}
+                  >
+                    登录
+                  </span>
+                  <span
+                    className="btn regist-btn"
+                    role="button"
+                    onClick={() => showLoginOrRegistPopup(dispatch, 'showRegistPopup', true)}
+                  >
+                    注册
+                  </span>
+                </div>
+              ) : (
+                <Link className="user-btn" to="/user-center">Hi, {userInfo.name || ''}</Link>
+              )
+            }
+          </Col>
+        </Row>
+      </header>
     );
   }
 }

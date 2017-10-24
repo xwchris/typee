@@ -1,7 +1,7 @@
+import { message } from 'antd';
+import config from 'config';
 import getData from 'services/dataFuncs';
 import { isIntNumber } from '../mixins/helpers';
-import config from 'config';
-import { createTip } from 'mixin';
 
 export default (props) => {
   // fileId 和 pageId
@@ -16,7 +16,7 @@ export default (props) => {
   const callback = (data) => {
     // 请求错误
     if (data.status === 1) {
-      createTip(data.error_message, 'error');
+      message.error(data.error_message);
     } else {
       dispatch({
         type: 'LESSON_DETAIL',

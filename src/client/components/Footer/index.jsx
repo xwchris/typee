@@ -1,13 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Layout } from 'antd';
 
-const Footer = () => (
-  <div className="component-footer">
-    <div className="container">
-      <p className="copyright">© 2017 typee</p>
-      <Link className="btn about-us" to="/about-us">关于我们</Link>
-    </div>
-  </div>
+const { Footer } = Layout;
+
+export default () => (
+  <Footer className="component-footer">
+    Typee Site ©2017 Created by Typee Group
+  </Footer>
 );
-
-export default Footer;

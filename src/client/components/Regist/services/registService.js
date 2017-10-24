@@ -1,7 +1,7 @@
 import getData from 'services/dataFuncs';
 import showLoginOrRegistPopup from 'services/loginService';
 import config from 'config';
-import { createTip } from 'mixin';
+import { message } from 'antd';
 
 export default (props, value) => {
   const { dispatch } = props;
@@ -10,9 +10,9 @@ export default (props, value) => {
   const callback = (data) => {
     // 请求错误
     if (data.status === 1) {
-      createTip(data.error_message, 'error');
+      message.error(data.error_message);
     } else {
-      createTip('注册成功!');
+      message.success('注册成功!');
       dispatch({
         type: 'IS_LOGGEDIN',
         key: 'isLoggedin',

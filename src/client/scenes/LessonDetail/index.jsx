@@ -215,17 +215,16 @@ class LessonDetail extends Component {
     const lessonDetail = this.props.lessonDetail || {};
     const { textArr = [], page = 0, totalPage = 0 } = lessonDetail;
     const last = (page + 1 === totalPage);
+    const codeString = textArr && textArr.map((item, index) => (<span key={`char_${index + 1}`} className={getClassName(index, item, this.state)}>{item}</span>));
     return (
       <div className="lesson-detail-container">
         <Timer ref={(ele) => { this.timer = ele; }} />
-        <div className="lesson-detail-content container">
+        <div className="lesson-detail-body">
           <pre className="code-box">
-            <code>
-              {textArr && textArr.map((item, index) => (<span key={`char_${index + 1}`} className={getClassName(index, item, this.state)}>{item}</span>))}
-            </code>
+            <code>{codeString}</code>
           </pre>
           {
-            this.props.showResult ? <Result last={last} /> : <div />
+            this.props.showResult ? <Result last={last} /> : null
           }
         </div>
       </div>

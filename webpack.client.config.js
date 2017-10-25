@@ -71,7 +71,7 @@ module.exports = function webpackClientConfig(env = 'development') {
         scenes: path.resolve(__dirname, 'src/client/scenes'),
         services: path.resolve(__dirname, 'src/client/services'),
         styles: path.resolve(__dirname, 'src/client/styles'),
-        mixin$: path.resolve(__dirname, 'src/client/mixins.js'),
+        mixins$: path.resolve(__dirname, 'src/client/mixins.js'),
         config$: path.resolve(__dirname, 'src/config.js'),
       },
     },
@@ -91,6 +91,9 @@ module.exports = function webpackClientConfig(env = 'development') {
                 browsers: ['last 2 versions', 'safari >= 7'],
               },
             }], 'react',
+          ],
+          plugins: [
+            ['import', { libraryName: 'antd', style: true }], // `style: true` 会加载 less 文件
           ],
         },
       }, {

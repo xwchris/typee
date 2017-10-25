@@ -1,7 +1,7 @@
 import getData from 'services/dataFuncs';
 import showLoginOrRegistPopup from 'services/loginService';
 import config from 'config';
-import { message } from 'antd';
+import { message } from 'mixins';
 
 export default (props, value) => {
   const { dispatch } = props;

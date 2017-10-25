@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { storage } from 'mixins';
 import Timer from './components/timer';
 import Result from './components/result';
 import { getClassName } from './mixins/helpers';
@@ -21,6 +22,8 @@ class LessonDetail extends Component {
       pointer: 0,
       inputArray: [],
     };
+    // 键盘控制
+    this.controlKeyboard = true;
   }
 
   componentWillMount() {
@@ -32,7 +35,7 @@ class LessonDetail extends Component {
   }
 
   componentDidMount() {
-    if (document) {
+    if (global.document) {
       // 处理键盘输入
       window.onkeypress = e => this.handleKeyPress(e);
       window.onkeydown = e => this.handleKeyDown(e);
@@ -50,6 +53,16 @@ class LessonDetail extends Component {
       this.start = true;
       // 请求数据
       getData(nextProps);
+    }
+  }
+
+  componentDidUpdate() {
+    // 如果弹出注册或者登录界面则失去键盘控制
+    const { showRegistPopup, showLoginPopup } = this.props;
+    if (showRegistPopup || showLoginPopup) {
+      this.controlKeyboard = false;
+    } else {
+      this.controlKeyboard = true;
     }
   }
 
@@ -88,6 +101,9 @@ class LessonDetail extends Component {
   // 键盘按下事件
   handleKeyPress(e) {
     // 阻止浏览器默认按键事件
+    if (!this.controlKeyboard) {
+      return;
+    }
     e.preventDefault();
     const textArr = this.props.lessonDetail.textArr;
     const inputChar = String.fromCharCode(e.charCode);
@@ -152,6 +168,9 @@ class LessonDetail extends Component {
 
   // 处理退格事件
   handleKeyDown(e) {
+    if (!this.controlKeyboard) {
+      return;
+    }
     const textArr = this.props.lessonDetail.textArr;
     const arr = this.state.inputArray;
     const pointer = this.state.pointer;
@@ -209,6 +228,14 @@ class LessonDetail extends Component {
       key: 'showResult',
       value: true,
     });
+
+    // 储存数据到本地
+    const dataCurrentLesson = {
+      pageId: parseInt(pageId, 10) || 0,
+      totalPage: this.props.lessonDetail.totalPage || 0,
+    };
+    storage.setItem(`typee_lesson_${fileId}`, JSON.stringify(dataCurrentLesson));
+    storage.setItem('typee_current_lesson', JSON.stringify({ fileId }));
   }
 
   render() {
@@ -218,7 +245,7 @@ class LessonDetail extends Component {
     const codeString = textArr && textArr.map((item, index) => (<span key={`char_${index + 1}`} className={getClassName(index, item, this.state)}>{item}</span>));
     return (
       <div className="lesson-detail-container">
-        <Timer ref={(ele) => { this.timer = ele; }} />
+        <Timer className={this.state.showResult ? 'hidden' : ''} ref={(ele) => { this.timer = ele; }} />
         <div className="lesson-detail-body">
           <pre className="code-box">
             <code>{codeString}</code>
@@ -234,6 +261,8 @@ class LessonDetail extends Component {
 
 export default connect(
   state => ({
+    showLoginPopup: state.showLoginPopup,
+    showRegistPopup: state.showRegistPopup,
     lessonDetail: state.lessonDetail,
     showResult: state.showResult,
   }),

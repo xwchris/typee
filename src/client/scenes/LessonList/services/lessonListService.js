@@ -1,4 +1,4 @@
-import { message } from 'antd';
+import { message } from 'mixins';
 import getData from 'services/dataFuncs';
 import config from 'config';
 

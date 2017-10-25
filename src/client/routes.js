@@ -1,8 +1,6 @@
 import App from './scenes';
 import LessonList from './scenes/LessonList';
 import LessonDetail from './scenes/LessonDetail';
-import ProblemFeedback from './scenes/ProblemFeedback';
-import AboutUs from './scenes/AboutUs';
 import UserCenter from './scenes/UserCenter';
 import Admin from './scenes/Admin';
 import AdminHome from './scenes/Admin/scenes/Home';
@@ -35,14 +33,6 @@ const routes = [
         // 课程详情页
         path: '/lesson-detail/:fileId/:pageId',
         component: LessonDetail,
-      }, {
-        // 反馈页
-        path: '/problem-feedback',
-        component: ProblemFeedback,
-      }, {
-        // 关于我们
-        path: '/about-us',
-        component: AboutUs,
       }, {
         // 用户中心
         path: '/user-center',

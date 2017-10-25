@@ -1,8 +1,31 @@
 import React, { Component } from 'react';
+import { storage } from 'mixins';
 import { Link } from 'react-router-dom';
-import { Layout, Card, Row, Col } from 'antd';
+import { Layout, Card, Row, Col, Progress } from 'antd';
 import { connect } from 'react-redux';
 import getData from './services/lessonListService';
+
+// 计算进度
+function calcLessonProgress(fileId) {
+  // 获取储存的数据
+  const lessonData = storage.getItem(`typee_lesson_${fileId}`);
+  const { pageId = 0, totalPage = 0 } = JSON.parse(lessonData || '{}');
+  if (totalPage === 0) {
+    return 0;
+  }
+  return ((pageId + 1) / totalPage) * 100;
+}
+
+// 获取课程当前页数
+function getCurrentPage(fileId) {
+  // 获取储存的数据
+  const lessonData = storage.getItem(`typee_lesson_${fileId}`);
+  const { pageId = 0, totalPage = 0 } = JSON.parse(lessonData || '{}');
+  if (totalPage <= pageId + 1) {
+    return 0;
+  }
+  return pageId + 1;
+}
 
 class LessonList extends Component {
   componentWillMount() {
@@ -19,8 +42,13 @@ class LessonList extends Component {
           {
             lessonList.map((item, index) => (
               <Col className="lesson-card" span={8} key={`lesson_${item.lesson_id || index + 1}`}>
-                <Link to={`/lesson-detail/${item.file_id}/0`}>
-                  <Card title={item.name} bordered={false}>{item.notes || ''}</Card>
+                <Link to={`/lesson-detail/${item.file_id}/${getCurrentPage(item.file_id)}`}>
+                  <Card title={item.name} bordered={false}>
+                    <p className="card-body-title">描述：</p>
+                    <p>{item.notes || ''}</p>
+                    <p className="card-body-title">进度：</p>
+                    <Progress percent={calcLessonProgress(item.file_id)} />
+                  </Card>
                 </Link>
               </Col>
             ))

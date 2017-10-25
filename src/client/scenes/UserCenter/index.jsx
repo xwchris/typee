@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Tabs } from 'antd';
 import BaseInfo from './components/BaseInfo';
 import getData from './services/getUserInfo';
+
+const { TabPane } = Tabs;
 
 class UserCenter extends Component {
   constructor(props) {
@@ -23,49 +26,25 @@ class UserCenter extends Component {
     const tabData = [
       {
         title: '基本信息',
-        className: 'tab-first',
         children: <BaseInfo />,
       },
       {
         title: '历史数据',
-        className: 'tab-second',
-        children: <div />,
+        children: <div>尚未开发...</div>,
       },
     ];
 
     return (
-      <div className="user-center-container container">
-        <div className="inner-box clearfix container">
-          <div className="section-nav pull-left">
-            <div className="nav-title">个人中心</div>
-            <div className="nav-list">
-              {
-                tabData.map((item, index) => (
-                  <div
-                    className="nav-item white-btn"
-                    key={`user-center-tab-btn-${index + 1}`}
-                    role="button"
-                    onClick={() => this.setState({ tabIndex: index + 1 })}
-                  >
-                    {item.title || ''}
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-          <div className="section-content">
-            {
-              tabData.map((item, index) => (
-                <div className={`tab ${this.state.tabIndex === index + 1 ? '' : 'hidden'} ${item.className || ''}`} key={`user-center-tab-${index + 1}`}>{item.child || <div />}
-                  <h2 className="tab-title">{item.title || ''}</h2>
-                  <div className="tab-content">
-                    {item.children || <div />}
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-        </div>
+      <div className="user-center-container">
+        <Tabs className="tabs" defaultActiveKey="tab_index_1" tabPosition="left">
+          {
+            tabData.map((item, index) => (
+              <TabPane tab={item.title} key={`tab_index_${index + 1}`}>
+                {item.children}
+              </TabPane>
+            ))
+          }
+        </Tabs>
       </div>
     );
   }

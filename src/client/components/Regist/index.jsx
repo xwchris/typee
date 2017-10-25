@@ -1,90 +1,86 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { message } from 'antd';
-import Popup from '../Popup';
+import { Form, Button, Input, Icon, Modal } from 'antd';
+import showLoginOrRegistPopup from 'services/loginService';
 import registService from './services/registService';
 
 class Regist extends Component {
-  // 注册函数
-  regist() {
-    // 如果验证没有通过则直接返回
-    if (!this.validate()) {
-      return;
-    }
-    // 要获取的三个值
-    registService(this.props.dispatch, {
-      name: this.form.username.value.trim(),
-      email: this.form.email.value.trim(),
-      password: this.form.password.value.trim(),
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        registService(this.props.dispatch, {
+          name: values.name,
+          email: values.email,
+          password: values.password,
+        });
+      }
     });
   }
 
-  // 验证注册数据
-  validate() {
-    const validateMap = {
-      username: {
-        value: this.form.username.value.trim(),
-        errorMsg: '用户名不能为空',
-        validMsg: '用户名格式不正确',
-      },
-      email: {
-        value: this.form.email.value.trim(),
-        errorMsg: '邮箱不能为空',
-        validMsg: '邮箱格式不正确',
-      },
-      password: {
-        value: this.form.password.value.trim(),
-        errorMsg: '密码不能为空',
-        validMsg: '密码格式不正确',
-      },
-      confirmPassword: {
-        value: this.form.confirmPassword.value.trim(),
-        errorMsg: '密码不能为空',
-        validMsg: '两次密码不一致',
-        valid: () => (this.form.confirmPassword.value.trim() === validateMap.password.value),
-      },
-    };
-
-    return Object.keys(validateMap).every((item) => {
-      if (!validateMap[item].value) {
-        message.error(validateMap[item].errorMsg);
-        return false;
-      } else if (validateMap[item].valid && !validateMap[item].valid()) {
-        message.error(validateMap[item].validMsg);
-        return false;
-      }
-      return true;
-    });
+  handleCancel() {
+    // 关闭登录框
+    showLoginOrRegistPopup(this.props.dispatch, 'showRegistPopup', false);
   }
 
   // 渲染
   render() {
+    const { getFieldDecorator } = this.props.form;
+
     return (
-      <Popup showPopup={this.props.showRegistPopup} popupKey="showRegistPopup">
-        <div className="component-regist">
-          <div className="regist-title">快速注册</div>
-          <form className="regist-content" ref={(ele) => { this.form = ele; }}>
-            <div className="inner-box">
-              <input type="text" name="username" className="username" placeholder="用户名" />
-              <input type="text" name="email" className="email" placeholder="邮箱" />
-              <input type="password" name="password" className="password" placeholder="密码" />
-              <input
+      <Modal
+        width="400"
+        visible={this.props.showRegistPopup}
+        title="快速注册"
+        onCancel={() => this.handleCancel()}
+        onOk={e => this.handleSubmit(e)}
+        okText="立即注册"
+      >
+        <Form onSubmit={e => this.handleSubmit(e)} className="login-form">
+          <Form.Item>
+            {getFieldDecorator('name', {
+              rules: [{ required: true, message: '请输入用户名!' }],
+            })(
+              <Input
+                prefix={<Icon type="user" style={{ fontSize: 13 }} />}
+                placeholder="用户名"
+              />,
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('emial', {
+              rules: [{ required: true, message: '请输入邮箱!' }, { type: 'email', mesage: '请输入正确的邮箱!' }],
+            })(
+              <Input
+                prefix={<Icon type="mail" style={{ fontSize: 13 }} />}
+                placeholder="邮箱"
+              />,
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('password', {
+              rules: [{ required: true, message: '请输入密码!' }],
+            })(
+              <Input
+                prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
                 type="password"
-                name="confirmPassword"
-                className="confirm-password"
+                placeholder="密码"
+              />,
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('passwordConfirm', {
+              rules: [{ required: true, message: '请输入密码!' }],
+            })(
+              <Input
+                prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
+                type="password"
                 placeholder="确认密码"
-              />
-              <div
-                className="blue-btn"
-                role="button"
-                onClick={() => this.regist()}
-              >
-                注册
-              </div>
-            </div>
-          </form>
-        </div>
-      </Popup>
+              />,
+            )}
+          </Form.Item>
+        </Form>
+      </Modal>
     );
   }
 }
@@ -93,4 +89,4 @@ export default connect(
   state => ({
     showRegistPopup: state.showRegistPopup,
   }),
-)(Regist);
+)(Form.create()(Regist));

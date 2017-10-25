@@ -1,4 +1,4 @@
-import { message } from 'antd';
+import { message } from 'mixins';
 import config from 'config';
 import getData from 'services/dataFuncs';
 import { isIntNumber } from '../mixins/helpers';

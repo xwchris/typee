@@ -1,4 +1,4 @@
-import { message } from 'antd';
+import { message } from 'mixins';
 import getData from 'services/dataFuncs';
 import showLoginOrRegistPopup from 'services/loginService';
 import config from 'config';

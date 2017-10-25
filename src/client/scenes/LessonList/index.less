@@ -1,59 +1,27 @@
 .lesson-list-container {
   
-  .lesson-list-content {
-    padding: 40px 0;
+  .lesson-card {
+    margin-top: 30px;
     
-    .content-title {
-      margin-bottom: 40px;
-      font-size: 28px;
-      line-height: 32px;
-      color: @main;
-      font-weight: bold;
+    &:first-child, &:nth-child(2), &:nth-child(3) {
+      margin-top: 0;
     }
 
-    .content-list {
+    .ant-card-body {
+      color: rgba(0, 0, 0, 0.65);
 
-      .content-item {
-        display: block;
-        padding: 15px 40px;
-        width: 48%;
-        height: 100px;
-        margin: 30px 4% 0 0;
-        box-shadow: 5px 5px 30px 5px #cccccc;
-        border-radius: 8px;
-        text-decoration: none;
-        transition: all .3s;
+      p {
+        margin-bottom: 10px;
 
-        &:nth-child(even) {
-          margin-right: 0;
+        &:last-child {
+          margin-bottom: 0;
         }
+      }
 
-        &:first-child, &:nth-child(2) {
-          margin-top: 0;
-        }
-
-        .item-title {
-          margin-bottom: 10px;
-          font-size: 22px;
-          line-height: 28px;
-          color: @black;
-        }
-
-        .item-desc {
-          color: @font-color;
-          font-size: 16px;
-          line-height: 22px;
-        }
-
-        &:hover {
-          background: @main;
-          
-          .item-title, .item-desc {
-            color: @white;
-          }
-        }
+      .card-body-title {
+        font-weight: bold;
+        color: rgba(0, 0, 0, 0.8);
       }
     }
   }
-
 }

@@ -1,49 +1,63 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Popup from '../Popup';
+import { Form, Input, Icon, Modal } from 'antd';
+import showLoginOrRegistPopup from 'services/loginService';
 import loginService from './services/loginService';
 
 class Login extends Component {
-  // 登录
-  login() {
-    loginService(this.props, {
-      login_card: this.username.value.trim(),
-      password: this.password.value.trim(),
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        loginService(this.props, {
+          login_card: values.name,
+          password: values.password,
+        });
+      }
     });
+  }
+
+  handleCancel() {
+    // 关闭登录框
+    showLoginOrRegistPopup(this.props.dispatch, 'showLoginPopup', false);
   }
 
   // 渲染
   render() {
+    const { getFieldDecorator } = this.props.form;
     return (
-      <Popup showPopup={this.props.showLoginPopup} popupKey="showLoginPopup">
-        <div className="component-login">
-          <div className="login-title">登录Typee</div>
-          <div className="login-content">
-            <div className="inner-box">
-              <input
-                type="text"
-                ref={(ele) => { this.username = ele; }}
-                className="login-input username"
-                placeholder="用户名/邮箱"
-              />
-              <input
+      <Modal
+        width="400"
+        visible={this.props.showLoginPopup}
+        title="快速登录"
+        onCancel={() => this.handleCancel()}
+        onOk={e => this.handleSubmit(e)}
+        okText="登录"
+      >
+        <Form onSubmit={e => this.handleSubmit(e)} className="login-form">
+          <Form.Item>
+            {getFieldDecorator('name', {
+              rules: [{ required: true, message: '请输入用户名!' }],
+            })(
+              <Input
+                prefix={<Icon type="user" style={{ fontSize: 13 }} />}
+                placeholder="用户名"
+              />,
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('password', {
+              rules: [{ required: true, message: '请输入密码!' }],
+            })(
+              <Input
+                prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
                 type="password"
-                ref={(ele) => { this.password = ele; }}
-                className="login-input password"
                 placeholder="密码"
-              />
-              <div
-                className="blue-btn"
-                role="button"
-                onClick={() => this.login()}
-              >
-              登录
-              </div>
-              <span className="forget-password btn">忘记密码？</span>
-            </div>
-          </div>
-        </div>
-      </Popup>
+              />,
+            )}
+          </Form.Item>
+        </Form>
+      </Modal>
     );
   }
 }
@@ -52,4 +66,4 @@ export default connect(
   state => ({
     showLoginPopup: state.showLoginPopup,
   }),
-)(Login);
+)(Form.create()(Login));

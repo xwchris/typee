@@ -21,7 +21,7 @@ const app = express();
 // 创建store
 const store = createStore(reducer, {});
 // webpack配置文件
-const compiler = webpack(webpackClientConfig('production'));
+const compiler = webpack(webpackClientConfig());
 
 // 设置视图引擎
 app.set('views', path.join(__dirname, '..', 'views'));

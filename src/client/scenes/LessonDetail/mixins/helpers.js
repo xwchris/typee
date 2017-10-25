@@ -40,7 +40,7 @@ export function calculateResult(result = {}) {
   // 错误字符数
   const errorCount = Object.values(errorChars).reduce((sum, item) => (sum + item), 0);
   // 无效输入比例 = （输入字符数 - 总字符数） /  总字符数
-  const invalidRate = `${Math.round(((inputCount - totalCount) / totalCount) * 100)}%`;
+  const invalidRate = Math.round(((inputCount - totalCount) / totalCount) * 100) || 0;
   // 退格次数
   const deleteCount = inputChars.delete || 0;
   // 返回结果
